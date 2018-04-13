@@ -13,7 +13,7 @@
 % You should have received a copy of the GNU General Public License
 % along with TREEQSM.  If not, see <http://www.gnu.org/licenses/>.
 
-function save_model_text(QSM,string)
+function save_model_text(QSM,path,string)
 
 % Save the cylinder, branch, and treedata structures in text-formats (.txt) 
 % into /result-folder
@@ -93,17 +93,17 @@ end
 TreeData = change_precision(TreeData); % use less decimals
 
 %% Save the data as text-files
-str = ['results/cyl_data_',string,'.txt'];
+str = fullfile(path,[string,'_cyl.txt']);
 fid = fopen(str, 'wt');
 fprintf(fid, [repmat('%g\t', 1, size(CylData,2)-1) '%g\n'], CylData.');
 fclose(fid);
 
-str = ['results/branch_data_',string,'.txt'];
+str = fullfile(path,[,string,'_branch.txt']);
 fid = fopen(str, 'wt');
 fprintf(fid, [repmat('%g\t', 1, size(BranchData,2)-1) '%g\n'], BranchData.');
 fclose(fid);
 
-str = ['results/tree_data_',string,'.txt'];
+str = fullfile(path,[string,'_tree.txt']);
 fid = fopen(str, 'wt');
 fprintf(fid, [repmat('%g\t', 1, size(TreeData,2)-1) '%g\n'], TreeData.');
 fclose(fid);
