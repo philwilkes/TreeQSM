@@ -123,13 +123,13 @@ function QSM = treeqsm(P,inputs)
 % UnmodRadius   unmodified radius of the cylinder
 % branch        branch (index in the branch structure array) of the cylinder
 % BranchOrder   branch order of the branch the cylinder belongs
-% PositionInBranch	running number of the cylinder in the branch it belongs
+% PositionInBranch  running number of the cylinder in the branch it belongs
 %
 % branch (structure-array) contains the following fields:
 % order     branch order (0 for trunk, 1 for branches originating from the trunk, etc.)
-% parent	index (in this file) of the parent branch
-% volume	volume of the branch in liters (sum of the volumes of the cylinders forming the branch)
-% length	length of the branch in meters (sum of the lengths of the cylinders)
+% parent    index (in this file) of the parent branch
+% volume    volume of the branch in liters (sum of the volumes of the cylinders forming the branch)
+% length    length of the branch in meters (sum of the lengths of the cylinders)
 % angle     branching angle in degrees (angle between the branch and its parent at the branching point)
 % height    height of the base of the branch
 % azimuth   azimuth of the branch at the base in degrees
@@ -188,6 +188,9 @@ function QSM = treeqsm(P,inputs)
 % cylind    Cylinder index in the stem where the triangulation stops
 
 %% Code starts -->
+
+disp('running new version')
+
 Time = zeros(11,1); % Save computation times for modelling steps
 Date = zeros(2,6); % Starting and stopping dates of the computation
 Date(1,:) = clock;
@@ -410,7 +413,7 @@ for h = 1:nd
                         % matlab-format (.mat)
                         if inputs.savemat
                             str = [inputs.name,'_t',num2str(inputs.tree),'_m',num2str(inputs.model)];
-                            save(['results/QSM_',str],'QSM')
+                            save([inputs.out, '/', str], 'qsm')
                         end
                         % text-format (.txt)
                         if inputs.savetxt
@@ -434,7 +437,7 @@ for h = 1:nd
                             else
                                 str = [inputs.name,'_t',num2str(inputs.tree),'_m',num2str(inputs.model)];
                             end
-                            save_model_text(qsm,str)
+                            save_model_text(qsm, inputs.out, str)
                         end
                         
                         %% Plot models and segmentations
