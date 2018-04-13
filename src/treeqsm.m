@@ -189,8 +189,6 @@ function QSM = treeqsm(P,inputs)
 
 %% Code starts -->
 
-disp('running new version')
-
 Time = zeros(11,1); % Save computation times for modelling steps
 Date = zeros(2,6); % Starting and stopping dates of the computation
 Date(1,:) = clock;
