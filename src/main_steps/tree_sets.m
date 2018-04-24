@@ -480,6 +480,7 @@ Trunk(MainBranches > 0) = true;
 [Par,CC] = cubical_partition(Ce,3*inputs.PatchDiam2Max,10);
 Sets = zeros(aux.nb,1,'uint32');
 BI = max(MainBranches);
+N = size(Par);
 for i = 1:BI
     if MainBranchIndexes(i)
         Branch = MainBranches == i; % The sets forming branch "i"
@@ -501,7 +502,14 @@ for i = 1:BI
                     NearSets = aux.Fal;
                     t = t+1;
                     for k = 1:m
-                        balls0 = Par(c(k,1)-t:c(k,1)+t,c(k,2)-t:c(k,2)+t,c(k,3)-t:c(k,3)+t);
+                        x1 = max(1,c(k,1)-t);
+                        x2 = min(c(k,1)+t,N(1));
+                        y1 = max(1,c(k,2)-t);
+                        y2 = min(c(k,2)+t,N(2));
+                        z1 = max(1,c(k,3)-t);
+                        z2 = min(c(k,3)+t,N(3));
+                        balls0 = Par(x1:x2,y1:y2,z1:z2);
+                        %balls0 = Par(c(k,1)-t:c(k,1)+t,c(k,2)-t:c(k,2)+t,c(k,3)-t:c(k,3)+t);
                         if t == 1
                             balls = vertcat(balls0{:});
                         else
